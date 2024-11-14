@@ -200,6 +200,13 @@ export default function Main(props: CSVImporterProps) {
               setIsSubmitting(true);
               setColumnMapping(columnMapping);
 
+              const headerRow = data.rows[selectedHeaderRow || 0].values;
+              // Get the original column mapping using columnMapping arrays index numbers
+              const originalColumnMapping: { [key: string]: string } = {};
+              Object.entries(columnMapping).forEach(([index, mapping]) => {
+                originalColumnMapping[headerRow[Number(index)]] = mapping['key'];
+              });
+
               // TODO (client-sdk): Move this type, add other data attributes (i.e. column definitions), and move the data processing to a function
               type MappedRow = {
                 index: number;
@@ -231,6 +238,9 @@ export default function Main(props: CSVImporterProps) {
                 // TODO (client-sdk): Either remove "name" or change it to the be the name of the original upload column
                 columns: includedColumns.map(({ key }) => ({ key, name: key })),
                 rows: mappedRows,
+                original_column_mapping: originalColumnMapping,
+                original_headers: headerRow,
+                original_sample_rows: data.rows.slice(1, 4).map((row) => row.values)
               };
 
               onComplete && onComplete(onCompleteData);

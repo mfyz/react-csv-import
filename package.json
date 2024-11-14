@@ -1,5 +1,5 @@
 {
-  "name": "csv-import-react",
+  "name": "@mefeyeze/csv-import-react",
   "version": "1.0.14",
   "description": "Open-source CSV and XLS/XLSX file importer for React and JavaScript",
   "main": "build/index.js",
@@ -114,5 +114,6 @@
     "xlsx": "^0.18.5",
     "zustand": "^4.4.7"
   },
-  "type": "module"
+  "type": "module",
+  "packageManager": "yarn@1.22.22+sha1.ac34549e6aa8e7ead463a7407e1c7390f61a6610"
 }
